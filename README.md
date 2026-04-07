@@ -43,10 +43,10 @@ use run-skill
 
 3. 该 skill 会自动：
 
-(1) 清除 `eval/reports/` 下的历史报告
-(2) 逐个读取 cases 源码，运行 bundle 分析
-(3) 将分析结果写入 `eval/reports/<case_name>.md`
-(4) 与 `eval/standards/` 中的标准答案进行逐项比对，给出评测结论
+- (1) 清除 `eval/reports/` 下的历史报告
+- (2) 逐个读取 cases 源码，运行 bundle 分析
+- (3) 将分析结果写入 `eval/reports/<case_name>.md`
+- (4) 与 `eval/standards/` 中的标准答案进行逐项比对，给出评测结论
 
 ### 目录结构
 
