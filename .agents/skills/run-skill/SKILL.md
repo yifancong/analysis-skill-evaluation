@@ -18,7 +18,7 @@ description: 对 eval/cases.json 中的 case 逐个运行 bundle 分析 Skill，
 每次执行前必须清除上一轮运行的历史记录，避免旧的 reports 内容残留在 context 中影响本次分析：
 
 1. **删除 `eval/reports/` 下所有已有的报告文件**（如 `*.md`），确保本次运行从零开始生成
-2. **不要读取旧的 reports 内容** — 在 Step 1 读取配置阶段，只读取 `cases.json`、`{{SKILL_PROMPT}}` 和 `standards/`，不要读取 `reports/` 中的历史文件
+2. **不要读取旧的 reports 内容** — 在 Step 1 读取配置阶段，只读取 `cases.json`、`{{SKILL_PROMPT}}`、`evaluate_skill.md` 和 `standards/`，不要读取 `reports/` 中的历史文件
 3. 如果 context 中已经加载了上一轮的 reports 内容，忽略这些内容，不要将其作为本次分析的参考 
 
 
@@ -45,7 +45,7 @@ description: 对 eval/cases.json 中的 case 逐个运行 bundle 分析 Skill，
 
 ## 任务
 
-读取 `eval/cases.json` 中列出的每个 case 的源码文件，按照 `{{SKILL_PROMPT}}` 中定义的分析维度和输出格式，对每个 case 进行完整的 bundle 分析，将结果保存到 `eval/reports/<case_name>.md`。随后对 `eval/reports/` 与 `eval/standards/` 下对应 case 的结果进行逐项比对，评定 reporter 结果的质量，并输出 `{{SKILL_PROMPT}}` 的耗时和 token 使用量。
+读取 `eval/cases.json` 中列出的每个 case 的源码文件，并读取 `eval/evaluate_skill.md` 中定义的 `Q1-Q4` 问题方向，作为对被评测 Skill 的统一出题输入。随后按照 `{{SKILL_PROMPT}}` 中定义的分析维度和输出格式，对每个 case 围绕这些问题完成 bundle 分析，将结果保存到 `eval/reports/<case_name>.md`。最后再对 `eval/reports/` 与 `eval/standards/` 下对应 case 的结果进行逐项比对，评定 reporter 结果的质量，并输出 `{{SKILL_PROMPT}}` 的耗时和 token 使用量。
 
 ## 执行步骤
 
@@ -53,19 +53,22 @@ description: 对 eval/cases.json 中的 case 逐个运行 bundle 分析 Skill，
 
 1. **清除旧报告** — 删除 `eval/reports/` 目录下所有 `*.md` 文件（如果目录不存在则创建）
 2. 读取 `eval/cases.json`，获取所有 case 的名称和需要读取的源码文件列表
-3. 读取 `{{SKILL_PROMPT}}`，了解分析维度和输出格式要求
-4. 读取 `eval/standards/` 中的标准答案文件，用于后续比对（不要读取 `eval/reports/` 中的任何历史文件）
+3. 读取 `eval/evaluate_skill.md`，提取评测时的 `Q1-Q4` 问题方向，将其作为对被评测 Skill 的题目集合
+4. 读取 `{{SKILL_PROMPT}}`，了解分析维度和输出格式要求
+5. 读取 `eval/standards/` 中的标准答案文件，用于后续比对（不要读取 `eval/reports/` 中的任何历史文件）
 
 ### Step 2: 逐个 case 分析
 
 对 `cases.json` 中的每个 case：
 
 1. 按 `context_files` 列表，读取所有源码文件（路径相对于仓库根目录）
-2. 基于 `{{SKILL_PROMPT}}` 中定义的分析维度，对该 case 进行完整分析
-3. 只报告该 case 中**实际存在**的问题，不要为了全面而编造不存在的问题
-4. 输出格式严格按照 `{{SKILL_PROMPT}}` 中的 Output Format 章节
-5. 读取该 case 在 `eval/reports/` 与 `eval/standards/` 下的对应结果，按 findings、evidence、impact、suggestion、priority 等维度逐项比对
-6. 基于比对结果评定 reporter 结果，至少给出：
+2. 基于 `eval/evaluate_skill.md` 中定义的 `Q1-Q4` 问题，对该 case 先明确需要回答的题目范围
+3. 再结合 `{{SKILL_PROMPT}}` 中定义的分析维度与输出格式，对该 case 进行完整分析
+4. 只报告该 case 中**实际存在**的问题，不要为了全面而编造不存在的问题
+5. 输出格式严格按照 `{{SKILL_PROMPT}}` 中的 Output Format 章节
+6. 生成 report 时，必须确保内容是在回答 `Q1-Q4` 对应问题，而不是只做泛泛的 bundle review
+7. 读取该 case 在 `eval/reports/` 与 `eval/standards/` 下的对应结果，按 findings、evidence、impact、suggestion、priority 等维度逐项比对
+8. 基于比对结果评定 reporter 结果，至少给出：
    - 总体评价（如：优秀 / 良好 / 一般 / 较差）
    - 命中标准答案的问题覆盖度
    - 多报 / 漏报 / 证据不足 / 建议不可执行 等问题
@@ -100,6 +103,8 @@ description: 对 eval/cases.json 中的 case 逐个运行 bundle 分析 Skill，
 ## 注意事项
 
 - 分析必须基于实际读取到的代码内容，不要凭记忆或猜测
+- `eval/evaluate_skill.md` 不只是评测规则，也用于定义执行 `{{SKILL_PROMPT}}` 时要回答的题目，即 `Q1-Q4`
+- `{{SKILL_PROMPT}}` 负责规定“如何回答”，`evaluate_skill.md` 负责规定“回答哪些问题”
 - reporter 评定必须基于 `reporter` 与 `standards` 的实际文本比对，不要只看文件名或标题
 - 每个 Finding 必须有具体的 Evidence（引用具体文件名、代码行、包名）
 - 每个 Finding 必须有可操作的 Suggestion（带代码示例）
