@@ -1,6 +1,6 @@
-# Build Tools Comparison
+# Bundle 分析 Skill 评测
 
-## Eval: Bundle 分析 Skill 评测
+> 部分 cases fork from https://github.com/rstackjs/build-tools-performance。
 
 本仓库内置了一套评测框架，用于评估 AI Agent 的 bundle 分析能力。评测流程分两步：
 
@@ -20,17 +20,17 @@ cd cases/react-10k && pnpm build:rspack && cd ../..
 
 ### Step 2: 运行 run-skill，生成报告并评测
 
-在仓库根目录使用 AI CLI，输入：
+1. 在仓库根目录使用 AI CLI（codex 或 claude code 等），输入：
 
 ```text
 use run-skill
 ```
 
-接着会要求填写需要检测的 SKILL_PROMPT, 需要拉取到本地的 .agent 中，然后返回给 AI CLI。
+2. 接着会要求填写需要检测的 SKILL_PROMPT, 需要拉取到本地的 .agent 中，然后返回给 AI CLI。例如：
 
 ```md
 
-• 需要先指定 SKILL_PROMPT，这个 skill 的说明要求没有明确 prompt 时不能继续执行。
+- 需要先指定 SKILL_PROMPT，这个 skill 的说明要求没有明确 prompt 时不能继续执行。
 
   可直接给我一个：
 
@@ -41,12 +41,12 @@ use run-skill
 
 ```
 
-该 skill 会自动：
+3. 该 skill 会自动：
 
-1. 清除 `eval/reports/` 下的历史报告
-2. 逐个读取 cases 源码，运行 bundle 分析
-3. 将分析结果写入 `eval/reports/<case_name>.md`
-4. 与 `eval/standards/` 中的标准答案进行逐项比对，给出评测结论
+(1) 清除 `eval/reports/` 下的历史报告
+(2) 逐个读取 cases 源码，运行 bundle 分析
+(3) 将分析结果写入 `eval/reports/<case_name>.md`
+(4) 与 `eval/standards/` 中的标准答案进行逐项比对，给出评测结论
 
 ### 目录结构
 
