@@ -30,7 +30,7 @@ async function main() {
     await new Promise<void>((resolve, reject) => {
       // Use pnpm exec to run rspack, which works reliably in CI environments
       // This is more reliable than npx when using pnpm as package manager
-      const child = spawn('pnpm', ['exec', 'rspack', 'build', '-c', 'rspack-rsdoctor.config.mjs'], {
+      const child = spawn('pnpm', ['exec', 'rspack', 'build:rspack', '-c', 'rspack-rsdoctor.config.mjs'], {
         cwd: caseDir,
         stdio: 'inherit',
         shell: false,
