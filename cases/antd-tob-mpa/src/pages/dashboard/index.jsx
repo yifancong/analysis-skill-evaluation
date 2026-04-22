@@ -11,7 +11,7 @@ import {
   categoryShare,
   regionPerformance,
 } from '../../mock/data';
-import '../../styles/global.css';
+import '../../styles/less/pages/dashboard.less';
 
 function DashboardPage() {
   return (

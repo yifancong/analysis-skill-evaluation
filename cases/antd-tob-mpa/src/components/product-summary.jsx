@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Col, Descriptions, Image, Row, Space, Tag, Typography } from 'antd';
+import '../styles/less/components/product.less';
 
 export default function ProductSummary({ product }) {
   return (

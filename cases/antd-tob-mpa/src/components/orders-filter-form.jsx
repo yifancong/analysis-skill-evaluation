@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Form, Input, Select, DatePicker, Space, Button } from 'antd';
+import '../styles/less/components/forms.less';
 
 export default function OrdersFilterForm({ statusOptions }) {
   return (

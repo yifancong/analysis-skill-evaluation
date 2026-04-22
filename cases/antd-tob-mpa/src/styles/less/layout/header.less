@@ -1,0 +1,28 @@
+@import '../foundation/tokens.less';
+@import '../foundation/mixins.less';
+
+.app-header {
+  .flex-between();
+  padding: 0 20px;
+  background: @color-bg-panel;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.header-icon {
+  color: @color-text-secondary;
+  font-size: 18px;
+  transition: color @transition-base;
+}
+
+.header-icon:hover {
+  color: @color-brand;
+}
+
+.page-header {
+  margin-bottom: @space-lg;
+}
+
+.page-header-main {
+  .flex-between();
+  gap: @space-lg;
+}

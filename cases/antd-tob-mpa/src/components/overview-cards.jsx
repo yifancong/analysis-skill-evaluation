@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Col, Row, Statistic, Tag } from 'antd';
+import '../styles/less/components/cards.less';
 
 export default function OverviewCards({ metrics }) {
   return (

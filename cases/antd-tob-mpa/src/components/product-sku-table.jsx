@@ -1,5 +1,7 @@
 import React from 'react';
 import { Card, Table } from 'antd';
+import '../styles/less/components/product.less';
+import '../styles/less/components/tables.less';
 
 export default function ProductSkuTable({ skus }) {
   return (

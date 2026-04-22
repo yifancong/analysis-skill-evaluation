@@ -1,5 +1,7 @@
 import React from 'react';
 import { Card, Table, Tag, Space, Button } from 'antd';
+import '../styles/less/components/orders.less';
+import '../styles/less/components/tables.less';
 
 const statusColorMap = {
   待支付: 'default',

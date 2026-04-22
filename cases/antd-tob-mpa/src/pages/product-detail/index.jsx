@@ -6,7 +6,7 @@ import PageHeader from '../../components/page-header';
 import ProductSummary from '../../components/product-summary';
 import ProductSkuTable from '../../components/product-sku-table';
 import { product } from '../../mock/data';
-import '../../styles/global.css';
+import '../../styles/less/pages/product-detail.less';
 
 function ProductDetailPage() {
   return (

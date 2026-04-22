@@ -1,9 +1,12 @@
 // @ts-check
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from '@rspack/cli';
 import { rspack } from '@rspack/core';
 import ReactRefreshPlugin from '@rspack/plugin-react-refresh';
 import { target, isProd } from '../../shared/constants.mjs';
 import { RsdoctorRspackPlugin } from '@rsdoctor/rspack-plugin';
+
+const srcDir = fileURLToPath(new URL('./src', import.meta.url));
 
 const makeHtml = (/** @type {string[]} */ chunks, /** @type {string} */ filename, /** @type {string} */ title) =>
   new rspack.HtmlRspackPlugin({
@@ -42,7 +45,23 @@ export default defineConfig({
         type: 'css',
       },
       {
+        test: /\.less$/,
+        type: 'css',
+        use: [
+          {
+            loader: 'less-loader',
+            options: {
+              // webpackImporter: false,
+              lessOptions: {
+                javascriptEnabled: true,
+              },
+            },
+          },
+        ],
+      },
+      {
         test: /\.(js|ts|tsx|jsx)$/,
+        // exclude: [/node_modules/],
         use: {
           loader: 'builtin:swc-loader',
           options: {
@@ -76,19 +95,19 @@ export default defineConfig({
     makeHtml(['esm-resolved-to-cjs'], 'esm-resolved-to-cjs.html', 'ESM Resolved To CJS'),
     makeHtml(['large-assets'], 'large-assets.html', 'Large Assets'),
     !isProd && new ReactRefreshPlugin(),
-    new RsdoctorRspackPlugin({
-      features: ['bundle', 'treeShaking'],
+    process.env.RSDOCTOR === 'true' && new RsdoctorRspackPlugin({
+      features: ['bundle', 'loader', 'treeShaking'],
       linter: {
         rules: {
           'esm-resolved-to-cjs': 'off'
         }
       },
-      output: {
-        mode: 'brief',
-        options: {
-          type: ['json'],
-        },
-      },
+      // output: {
+      //   mode: 'brief',
+      //   options: {
+      //     type: ['json'],
+      //   },
+      // },
     }),
   ],
 });

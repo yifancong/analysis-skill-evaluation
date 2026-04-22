@@ -5,7 +5,6 @@ import AppLayout from '../../layouts/app-layout';
 import PageHeader from '../../components/page-header';
 import OverviewCards from '../../components/overview-cards';
 import { dashboardMetrics } from '../../mock/data';
-import '../../styles/global.css';
 
 // ---- Side-effects-only imports (no specifiers used) ----
 // These imports are intentionally kept as bare side-effect imports

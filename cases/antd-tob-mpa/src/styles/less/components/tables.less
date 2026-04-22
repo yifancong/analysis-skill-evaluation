@@ -1,0 +1,21 @@
+@import '../foundation/tokens.less';
+@import '../foundation/mixins.less';
+
+.ant-table-wrapper {
+  .panel-surface();
+  overflow: hidden;
+}
+
+.ant-table-thead > tr > th {
+  background: @color-bg-muted;
+  color: @color-text-secondary;
+  font-weight: 600;
+}
+
+.table-row-warning {
+  background: fade(@color-warning, 8%);
+}
+
+.table-row-danger {
+  background: fade(@color-danger, 8%);
+}

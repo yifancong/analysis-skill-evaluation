@@ -1,0 +1,21 @@
+@import '../foundation/tokens.less';
+@import '../foundation/mixins.less';
+
+.product-cover {
+  width: 100%;
+  border-radius: @radius-lg;
+}
+
+.product-summary {
+  .panel-surface();
+}
+
+.product-summary__meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: @space-md;
+}
+
+.sku-status {
+  .truncate-line();
+}

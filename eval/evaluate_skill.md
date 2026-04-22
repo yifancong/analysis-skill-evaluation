@@ -9,26 +9,32 @@
 
 ## 评价维度
 
-用户会围绕以下**四个方向**提问，评测时需按方向逐一判定：
+用户会围绕以下**六个方向**提问，评测时需按方向逐一判定：
 
 | 方向 | 用户问题 | 标签 |
 |------|----------|------|
-| Q1 | 有什么仅因副作用而被打包的文件 | `[Q1:SIDE_EFFECTS]` |
-| Q2 | 产物需要做哪些优化（含：重复包、跨 chunk 相同 module、副作用文件、过大资源等） | `[Q2:OUTPUT_OPT]` |
-| Q3 | 有哪些重复包 | `[Q3:DUPLICATE_PKGS]` |
-| Q4 | tree-shaking 问题可以做哪些优化 | `[Q4:TREE_SHAKING]` |
+| Q1 | 哪些模块没有被业务代码实际使用，只是因为副作用被保留进 bundle？ | `[Q1:SIDE_EFFECTS]` |
+| Q2 | 从产物体积角度看，当前 bundle 最大的优化点有哪些？ | `[Q2:OUTPUT_OPT]` |
+| Q2 | 请做一次 bundle 产物优化诊断，覆盖重复依赖、chunk 冗余、副作用和大资源。 | `[Q2:OUTPUT_OPT]` |
+| Q3 | 请列出重复包的包名、版本、大小和涉及 chunk。 | `[Q3:DUPLICATE_PKGS]` |
+| Q4 | 当前有哪些 tree-shaking 失效点？应该怎么优化？ | `[Q4:TREE_SHAKING]` |
+| Q4 | 哪些模块因为导入方式、barrel file 或 CJS 导致没有被摇掉？ | `[Q4:TREE_SHAKING]` |
+| Q5 | 哪些 loader 耗时最高？分别处理了哪些文件或资源？ | `[Q5:LOADER_COST]` |
+| Q5 | 当前构建里 loader 阶段的主要性能瓶颈是什么？ | `[Q5:LOADER_COST]` |
+| Q6 | 哪些 plugin hook 耗时最高？耗时集中在哪些阶段？ | `[Q6:PLUGIN_COST]` |
+| Q6 | 当前构建里 plugin 阶段的主要性能瓶颈是什么？ | `[Q6:PLUGIN_COST]` |
 
-> 不是每个 case 都涉及全部四个方向，如果某方向在某 case 中无对应检查点则跳过。
+> 不是每个 case 都涉及全部六个方向，如果某方向在某 case 中无对应检查点则跳过。
 
 ## 任务
 
-将 `eval/reports/<case>.md`（Skill 实际输出）与 `eval/standards/<case>.md`（标准答案）逐条对比，**按四个问题方向**判定每个检查点是否被覆盖，输出正确率和错误率。
+将 `eval/reports/<case>.md`（Skill 实际输出）与 `eval/standards/<case>.md`（标准答案）逐条对比，**按六个问题方向**判定每个检查点是否被覆盖，输出正确率和错误率。
 
 ## 执行步骤
 
 ### Step 1: 读取所有 standard 文件
 
-读取 `eval/standards/` 目录下的所有 `.md` 文件。每个文件按问题方向（`## Q1` ~ `## Q4`）组织，其中用 `### [CHECK]` 标记的段落是一个独立检查点。
+读取 `eval/standards/` 目录下的所有 `.md` 文件。每个文件按问题方向（`## Q1` ~ `## Q6`）组织，其中用 `### [CHECK]` 标记的段落是一个独立检查点。
 
 ### Step 2: 读取对应的 report 文件
 
@@ -71,6 +77,12 @@
 #### Q4: tree-shaking 优化
 - ...
 
+#### Q5: loader 耗时
+- ...
+
+#### Q6: plugin 耗时
+- ...
+
 正确率: X/Y = XX.X%
 
 ---
@@ -95,6 +107,8 @@
 | Q2: 产物优化 | c | d | d/c |
 | Q3: 重复包 | e | f | f/e |
 | Q4: tree-shaking | g | h | h/g |
+| Q5: loader 耗时 | i | j | j/i |
+| Q6: plugin 耗时 | k | l | l/k |
 ```
 
 ### Step 5: 保存结果

@@ -1,0 +1,25 @@
+@import './tokens.less';
+
+.panel-surface() {
+  background: @color-bg-panel;
+  border: 1px solid @color-border;
+  border-radius: @radius-lg;
+  box-shadow: @shadow-card;
+}
+
+.flex-between() {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.focus-ring() {
+  outline: 2px solid fade(@color-brand, 28%);
+  outline-offset: 2px;
+}
+
+.truncate-line() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

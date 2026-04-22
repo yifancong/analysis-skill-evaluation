@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Col, Row } from 'antd';
 import { Line, Pie, Column, Radar } from '@ant-design/charts';
+import '../styles/less/components/charts.less';
 
 export default function ChartsPanel({ monthlySales, categoryShare, regionPerformance }) {
   const lineConfig = {

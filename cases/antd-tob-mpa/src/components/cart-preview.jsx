@@ -1,5 +1,7 @@
 import React from 'react';
 import { Card, Table, Typography } from 'antd';
+import '../styles/less/components/orders.less';
+import '../styles/less/components/tables.less';
 
 export default function CartPreview({ items }) {
   const total = items.reduce((sum, item) => sum + item.qty * item.price, 0);

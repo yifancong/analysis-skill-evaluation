@@ -6,7 +6,7 @@ import PageHeader from '../../components/page-header';
 import CreateOrderForm from '../../components/create-order-form';
 import CartPreview from '../../components/cart-preview';
 import { cartItems, orderFormDefaults } from '../../mock/data';
-import '../../styles/global.css';
+import '../../styles/less/pages/create-order.less';
 
 function CreateOrderPage() {
   return (

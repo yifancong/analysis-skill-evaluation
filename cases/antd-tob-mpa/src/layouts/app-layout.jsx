@@ -1,5 +1,12 @@
 import React from 'react';
 import { Layout, Menu, Avatar, Badge, Typography, Space } from 'antd';
+import '../styles/less/foundation/reset.less';
+import '../styles/less/foundation/typography.less';
+import '../styles/less/layout/app-shell.less';
+import '../styles/less/layout/header.less';
+import '../styles/less/layout/content.less';
+import '../styles/less/utilities/spacing.less';
+import '../styles/less/utilities/state.less';
 
 const { Header, Sider, Content } = Layout;
 

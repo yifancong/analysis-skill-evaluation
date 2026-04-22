@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, DatePicker, Form, Input, Select, Button, Row, Col, Space } from 'antd';
+import '../styles/less/components/forms.less';
 
 export default function CreateOrderForm({ defaults }) {
   return (

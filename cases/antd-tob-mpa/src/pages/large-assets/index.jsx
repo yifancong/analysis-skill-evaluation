@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Card, Col, Row, Typography, Tag, Alert, Descriptions, Divider, Image, List } from 'antd';
 import AppLayout from '../../layouts/app-layout';
 import PageHeader from '../../components/page-header';
-import '../../styles/global.css';
+import '../../styles/less/pages/large-assets.less';
 
 // ---- Large Asset Imports ----
 // WARNING: These imports pull oversized resources directly into the JS bundle.

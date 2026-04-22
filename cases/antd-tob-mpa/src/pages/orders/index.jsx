@@ -7,7 +7,7 @@ import OverviewCards from '../../components/overview-cards';
 import OrdersFilterForm from '../../components/orders-filter-form';
 import OrdersTable from '../../components/orders-table';
 import { dashboardMetrics, orderStatusOptions, orders } from '../../mock/data';
-import '../../styles/global.css';
+import '../../styles/less/pages/orders.less';
 
 function OrdersPage() {
   return (

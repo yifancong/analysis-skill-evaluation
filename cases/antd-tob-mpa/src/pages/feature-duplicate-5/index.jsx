@@ -4,7 +4,6 @@ import AppLayout from '../../layouts/app-layout';
 import PageHeader from '../../components/page-header';
 import OverviewCards from '../../components/overview-cards';
 import { dashboardMetrics } from '../../mock/data';
-import '../../styles/global.css';
 
 function FeatureDuplicate5Page() {
   return (

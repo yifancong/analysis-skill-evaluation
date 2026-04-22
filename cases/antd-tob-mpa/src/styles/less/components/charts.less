@@ -1,0 +1,21 @@
+@import '../foundation/tokens.less';
+
+.chart-panel {
+  min-height: 320px;
+}
+
+.chart-panel .ant-card-body {
+  padding: @space-lg;
+}
+
+.chart-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: @space-md;
+}
+
+.chart-kpi {
+  padding: @space-md;
+  background: @color-bg-muted;
+  border-radius: @radius-md;
+}

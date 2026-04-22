@@ -5,7 +5,7 @@ import AppLayout from '../../layouts/app-layout';
 import PageHeader from '../../components/page-header';
 import ChartsPanel from '../../components/charts-panel';
 import { monthlySales, categoryShare, regionPerformance } from '../../mock/data';
-import '../../styles/global.css';
+import '../../styles/less/pages/charts.less';
 
 function ChartsPage() {
   return (
